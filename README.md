@@ -6,6 +6,7 @@ This scripts assumes you are running a linux based machine (tested only on Raspb
 
 ## Install
 1. Clone the repository using:
+
 ```
 git clone https://github.com/itayavra/alexa-headless-start.git
 ```
