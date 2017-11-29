@@ -4,23 +4,43 @@ let spawn = require('child_process').spawn;
 let carry = require('carrier').carry;
 let fs = require('fs');
 
+// Alexa avs sample app samples path - change this if you have it installed in a different path
+let ALEXA_AVS_SAMPLE_APP_SAMPLES_PATH = '/home/pi/Desktop/alexa-avs-sample-app/samples';
+
+let companionServiceScriptArgs = {
+    name: 'companionService',
+    workingDirectory: `${ALEXA_AVS_SAMPLE_APP_SAMPLES_PATH}/companionService`, 
+    command: 'npm start' 
+};
+
+let javaClientScriptArgs = { 
+    name: 'javaClient',
+    workingDirectory: `${ALEXA_AVS_SAMPLE_APP_SAMPLES_PATH}/javaclient`,  
+    command: 'mvn exec:exec' 
+};
+
+let wakeWordAgentScriptArgs = { 
+    name: 'wakeWordAgent',
+    workingDirectory: `${ALEXA_AVS_SAMPLE_APP_SAMPLES_PATH}/wakeWordAgent/src`, 
+    command: './wakeWordAgent -e kitt_ai' 
+};
+
 let mainLogFileName = 'alexa-headless-start.log';
 let logsDirectory = 'logs';
-let alexaAvsSampleAppDir = '~/Desktop/alexa-avs-sample-app/samples';
 
-function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
+function runScript(scriptArgs, scriptInitializedString, onScriptInitialized) {
     try {
-        log(`Starting ${scriptName}`, mainLogFileName);
+        log(`Starting ${scriptArgs.name}`, mainLogFileName);
 
-        let scriptLogFileName = scriptName + '.log';
+        let scriptLogFileName = scriptArgs.name + '.log';
         let isScriptInitialized = false;
-        let scriptProcess = spawn('sh', [`scripts/${scriptName}`]);
+        let scriptProcess = spawn(scriptArgs.command, { cwd: scriptArgs.workingDirectory, shell: true });
         scriptProcess.on('error', err => {
             log(err, mainLogFileName);
         })
 
         scriptProcess.on('close', function (code) {
-            log(`Script ${scriptName} exited with code ${code}`, scriptLogFileName);
+            log(`Script ${scriptArgs.name} exited with code ${code}`, scriptLogFileName);
         });
 
         scriptProcess.stderr.on('data', function (data) {
@@ -35,7 +55,7 @@ function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
             }
 
             isScriptInitialized = true;
-            log(`${scriptName} is initialized`, mainLogFileName);
+            log(`${scriptArgs.name} is initialized`, mainLogFileName);
 
             if (onScriptInitialized) {
                 onScriptInitialized();
@@ -75,9 +95,9 @@ function startAlexa() {
     log('Starting Alexa', mainLogFileName);
     log('--------------', mainLogFileName);
 
-    runScript('companionService.sh', 'Listening on port 3000',
-        () => runScript('javaClient.sh', 'Logged in.',
-            () => runScript('wakeWordAgent.sh', 'Connected to AVS client',
+    runScript(companionServiceScriptArgs, 'Listening on port 3000',
+        () => runScript(javaClientScriptArgs, 'Logged in.',
+            () => runScript(wakeWordAgentScriptArgs, 'Connected to AVS client',
                 () => playAlexaHello()
             )
         )
