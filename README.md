@@ -16,11 +16,7 @@ This scripts assumes you are running a linux based machine (tested only on Raspb
 git clone https://github.com/itayavra/alexa-headless-start.git
 ```
 
-2. Make sure the path to your alexa-avs-sample-app folder is correct in the files:
-   - alexa-headless-start.js
-   - scripts/companionService.sh
-   - scripts/javaClient.sh
-   - scripts/wakeWordAgent.sh
+2. Make sure the path to your alexa-avs-sample-app folder is correct inside **alexa-headless-start.js**
 
 3. Run with:
 ```
@@ -28,4 +24,4 @@ cd alexa-headless-start
 npm install # Only needed for the first time
 npm start
 ```
-4. Enjoy
+4. Enjoy!
