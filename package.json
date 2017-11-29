@@ -1,0 +1,11 @@
+{
+    "name": "alexa-headless-start",
+    "version": "0.2.0",
+    "private": true,
+    "scripts": {
+        "start": "node alexa-headless-start"
+    },
+    "dependencies": {
+        "carrier": "^0.3.0"
+    }
+}
