@@ -1,3 +1,3 @@
 #!/bin/bash
-cd ~/Desktop/alexa-avs-sample-app/samples
+cd $1
 cd javaclient && mvn exec:exec

@@ -14,7 +14,7 @@ function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
 
         let scriptLogFileName = scriptName + '.log';
         let isScriptInitialized = false;
-        let scriptProcess = spawn('sh', [`scripts/${scriptName}`]);
+        let scriptProcess = spawn('sh', [`scripts/${scriptName}`, alexaAvsSampleAppDir]);
         scriptProcess.on('error', err => {
             log(err, mainLogFileName);
         })
