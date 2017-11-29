@@ -1,3 +1,3 @@
 #!/bin/bash
-cd $1
+cd ~/Desktop/alexa-avs-sample-app/samples
 cd wakeWordAgent/src && sudo ./wakeWordAgent -e kitt_ai

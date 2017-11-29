@@ -6,7 +6,7 @@ let fs = require('fs');
 
 let mainLogFileName = 'alexa-headless-start.log';
 let logsDirectory = 'logs';
-let alexaAvsSampleAppDir = '~/Desktop/alexa-avs-sample-app/samples/';
+let alexaAvsSampleAppDir = '~/Desktop/alexa-avs-sample-app/samples';
 
 function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
     try {
@@ -14,7 +14,7 @@ function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
 
         let scriptLogFileName = scriptName + '.log';
         let isScriptInitialized = false;
-        let scriptProcess = spawn('sh', [`scripts/${scriptName}`, alexaAvsSampleAppDir]);
+        let scriptProcess = spawn('sh', [`scripts/${scriptName}`]);
         scriptProcess.on('error', err => {
             log(err, mainLogFileName);
         })
