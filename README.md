@@ -17,10 +17,10 @@ git clone https://github.com/itayavra/alexa-headless-start.git
 ```
 
 2. Make sure the path to your alexa-avs-sample-app folder is correct in the files:
->-alexa-headless-start.js
->-scripts/companionService.sh
->-scripts/javaClient.sh
->-scripts/wakeWordAgent.sh
+   - alexa-headless-start.js
+   - scripts/companionService.sh
+   - scripts/javaClient.sh
+   - scripts/wakeWordAgent.sh
 
 3. Run with:
 ```
