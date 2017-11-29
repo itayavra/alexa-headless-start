@@ -6,7 +6,7 @@ let fs = require('fs');
 
 let mainLogFileName = 'alexa-headless-start.log';
 let logsDirectory = 'logs';
-let alexaAvsSampleAppDir = '~/Desktop/alexa-avs-sample-app/samples';
+let alexaAvsSampleAppDir = '~/Desktop/alexa-avs-sample-app/samples/';
 
 function runScript(scriptName, scriptInitializedString, onScriptInitialized) {
     try {
