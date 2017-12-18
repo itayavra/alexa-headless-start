@@ -25,3 +25,5 @@ npm install # Only needed for the first time
 npm start
 ```
 4. Enjoy!
+
+5. Liked it? Give me a star :)
